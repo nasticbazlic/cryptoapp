@@ -1,0 +1,50 @@
+// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+// const cryptoApiHeader = {
+//   'x-rapidapi-key': '817394eb65mshe1ed55949c8f7ffp1c2f7cjsn9c2596c10a36',
+//   'x-rapidapi-host': 'coinranking1.p.rapidapi.com'
+// }
+
+// const baseUrl = 'https://coinranking1.p.rapidapi.com';
+
+// const createRequest = ( url ) => ({url, headers: cryptoApiHeader})
+
+// export const cryptoApi = createApi({
+//   reducerPath: 'cryptoApi',
+//   baseQuery: fetchBaseQuery({ baseUrl }),
+//   endpoints: (builder) => ({
+//     getCrypto: builder.query({
+//       query: () => createRequest('/coins')
+//     })
+//   })
+// });
+
+// export const {
+//   useGetCryptosQuery,
+// } = cryptoApi;
+
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+const cryptoApiHeaders = {
+  'x-rapidapi-key': '817394eb65mshe1ed55949c8f7ffp1c2f7cjsn9c2596c10a36',
+  'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
+};
+
+const baseUrl = 'https://coinranking1.p.rapidapi.com';
+
+const createRequest = (url) => ({ url, headers: cryptoApiHeaders });
+
+export const cryptoApi = createApi({
+  reducerPath: 'cryptoApi',
+  baseQuery: fetchBaseQuery({ baseUrl }),
+  endpoints: (builder) => ({
+    getCryptos: builder.query({
+      query: (count) => createRequest(`/coins?limit=${count}`),
+    }),
+    getCryptoDetails: builder.query({
+      query: (coinId ) => createRequest(`/coin/${coinId}`),
+    }),
+  }),
+});
+
+export const { useGetCryptosQuery, useGetCryptoDetailsQuery } = cryptoApi;
