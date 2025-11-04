@@ -358,6 +358,7 @@ width: 70%;
 }
 .crypto-card-container{
   min-height: 65vh !important;
+  justify-content: center;
 }
 .crypto-card{
   min-width: 250px;
